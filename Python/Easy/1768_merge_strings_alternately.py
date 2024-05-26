@@ -29,8 +29,8 @@ class Solution:
         """
         Merges two strings alternately using map and lambda.
 
-        Time Complexity: O(n), where n is the length of the longer string.
-        Space Complexity: O(n), for storing the final merged string.
+        Time Complexity: O(n1 + n2), where n1 is the length of word1, and n2 is the length of word2.
+        Space Complexity: O(n1 + n2), for storing the final merged string.
         """
         max_len = max(len(word1), len(word2))
         
@@ -43,8 +43,8 @@ class Solution:
         """
         Merges two strings alternately using a while loop.
 
-        Time Complexity: O(n), where n is the length of the longer string.
-        Space Complexity: O(n), for storing the final merged string.
+        Time Complexity: O(n1 + n2), where n1 is the length of word1, and n2 is the length of word2.
+        Space Complexity:O(n1 + n2), for storing the final merged string.
         """
         merged = []
         i, j = 0, 0
@@ -59,6 +59,40 @@ class Solution:
                 j += 1
         
         return ''.join(merged)
+    
+
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        """ 
+        Merges two stings alternatively using while loops
+        
+        Time Complexity: O(n)
+        Time Complexity: O(A + B) where A is Length of word1, B is Length of word2
+        Space Complexity: O(A + B) where- A is Length of word1, B is Length of word2
+        """
+        A, B = len(word1), len(word2)
+        a, b = 0, 0
+        s = []
+
+        word = 1
+        while a < A and b < B:
+            if word == 1:
+                s.append(word1[a])
+                a += 1
+                word = 2
+            else:
+                s.append(word2[b])
+                b += 1
+                word = 1
+        
+        while a < A:
+            s.append(word1[a])
+            a += 1
+        
+        while b < B:
+            s.append(word2[b])
+            b += 1
+        
+        return ''.join(s)
 
 if __name__ == "__main__":
     # Test cases
