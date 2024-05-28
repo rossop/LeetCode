@@ -144,3 +144,6 @@ dmypy.json
 
 # Commit Notes
 commit.git
+
+# Temporary files
+*.swp
