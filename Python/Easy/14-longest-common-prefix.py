@@ -1,3 +1,9 @@
+"""
+NOTES
+When looking at other people times my solution does not seem to beat other ones by much. 
+This code is only in the 28% percentile. Even adding a solution using map doesn't speed up much the solution. 
+"""
+
 from typing import List
 
 class Solution:
