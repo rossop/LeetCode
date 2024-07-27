@@ -119,6 +119,48 @@ class Solution:
             ranges.append(f"{start}")
         
         return ranges
+    
+    def summaryRangesMap(self, nums: List[int]) -> List[str]:
+        """
+        An alternative implementation using the map function to improve code readability.
+
+        This method uses map to identify breaks in the consecutive sequence and then groups the 
+        ranges accordingly.
+
+        Args:
+            nums (List[int]): A sorted list of unique integers.
+
+        Returns:
+            List[str]: A list of strings representing the smallest sorted list of ranges that cover 
+            all the numbers in the array exactly.
+
+        Time Complexity:
+            O(N), where N is the length of the input list. The function iterates through the list once.
+
+        Space Complexity:
+            O(1), not including the space required for the output list.
+        """
+        if not nums:
+            return []
+
+        ranges = []
+        start = nums[0]
+
+        for i, n in enumerate(map(lambda i: nums[i] - nums[i-1], range(1, len(nums)))):
+            if n > 1:
+                if start != nums[i]:
+                    ranges.append(f"{start}->{nums[i]}")
+                else:
+                    ranges.append(f"{start}")
+                start = nums[i+1]
+
+        # Add the last range
+        if start != nums[-1]:
+            ranges.append(f"{start}->{nums[-1]}")
+        else:
+            ranges.append(f"{start}")
+
+        return ranges
 
 
 if __name__ == "__main__":
@@ -139,5 +181,6 @@ if __name__ == "__main__":
     for i, (nums, expected) in enumerate(test_cases, 1):
         assert solution.summaryRanges(nums) == expected, f"Method 1, Test case {i} failed"
         assert solution.summaryRangesAlternative(nums) == expected, f"Method 2, Test case {i} failed"
+        assert solution.summaryRangesMap(nums) == expected, f"Method 3, Test case {i} failed"
 
     print("All test cases passed!")
