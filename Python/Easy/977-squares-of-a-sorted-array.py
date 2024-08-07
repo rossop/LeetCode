@@ -28,17 +28,20 @@ class Solution:
                 Input: nums = [-7, -3, 2, 3, 11]
                 Output: [4, 9, 9, 49, 121]
         """
-        n = len(nums)
-        res = [0] * n
-        L, R = 0, n-1
-        for i in range(n-1, -1, -1):
-            if abs(nums[L]) > abs(nums[R]):
-                val = nums[L] ** 2
-                L += 1
-            else:
-                val = nums[R] ** 2
+        n: int = len(nums)
+        res: List[int] = []
+        L: int = 0 
+        R: int = n-1
+
+        while L <= R:
+            if abs(nums[R]) > abs(nums[L]):
+                sq = nums[R]**2
                 R -= 1
-            res[i] = val
+            else:
+                sq = nums[L]**2
+                L += 1
+            res.append(sq)
+        res.reverse()  # The optimised solution avoids the need for reversing 
         return res
 
     def sortedSquaresNlogN(self, nums: List[int]) -> List[int]:
@@ -69,8 +72,7 @@ class Solution:
                 Input: nums = [-7, -3, 2, 3, 11]
                 Output: [4, 9, 9, 49, 121]
         """
-        for i in range(len(nums)):
-            nums[i] = nums[i] ** 2
+        nums = [n**2 for n in nums]
         return sorted(nums)
 
     def sortedSquaresOptimized(self, nums: List[int]) -> List[int]:
@@ -100,9 +102,10 @@ class Solution:
                 Input: nums = [-7, -3, 2, 3, 11]
                 Output: [4, 9, 9, 49, 121]
         """
-        n = len(nums)
-        res = [0] * n
-        L, R = 0, n-1
+        n: int = len(nums)
+        res: List[int] = [0] * n
+        L: int = 0 
+        R: int = n-1
         for i in range(n-1, -1, -1):
             if abs(nums[L]) > abs(nums[R]):
                 res[i] = nums[L] ** 2
@@ -112,9 +115,24 @@ class Solution:
                 R -= 1
         return res
 
-# Example usage:
-solution = Solution()
-print(solution.sortedSquares([-4, -1, 0, 3, 10]))  # Output: [0, 1, 9, 16, 100]
-print(solution.sortedSquaresNlogN([-4, -1, 0, 3, 10]))  # Output: [0, 1, 9, 16, 100]
-print(solution.sortedSquaresOptimized([-4, -1, 0, 3, 10]))  # Output: [0, 1, 9, 16, 100]
+
+if __name__ == "__main__":
+    solution = Solution()
+
+    # Test cases with expected outcomes
+    test_cases = [
+        ([-4, -1, 0, 3, 10], [0, 1, 9, 16, 100]),
+        ([-7, -3, 2, 3, 11], [4, 9, 9, 49, 121]),
+        ([-5, -3, -2, -1], [1, 4, 9, 25]),
+        ([0, 1, 2, 3, 4], [0, 1, 4, 9, 16]),
+        ([1, 2, 3, 4, 5], [1, 4, 9, 16, 25]),
+        ([-1, 0, 1], [0, 1, 1]),
+    ]
+    for i, (input_list, expected) in enumerate(test_cases, 1):
+        assert solution.sortedSquares(input_list.copy()) == expected, f"Test case {i} failed for sortedSquares"
+        assert solution.sortedSquaresNlogN(input_list.copy()) == expected, f"Test case {i} failed for sortedSquaresNlogN"
+        assert solution.sortedSquaresOptimized(input_list.copy()) == expected, f"Test case {i} failed for sortedSquaresOptimized"
+        print(f"Test case {i} passed")
+
+    print("All test cases passed!")
 
