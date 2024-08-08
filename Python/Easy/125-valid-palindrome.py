@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         """
@@ -27,8 +28,8 @@ class Solution:
             - 1 <= s.length <= 2 * 10^5
             - s consists only of printable ASCII characters.
         """
-        s = [char.lower() for char in s if char.isalnum()]
-        n = len(s)
+        s: List[str] = [char.lower() for char in s if char.isalnum()]
+        n: int = len(s)
         L: int = 0
         R: int = n - 1
         while L < R:
@@ -71,7 +72,7 @@ class Solution:
             - 1 <= s.length <= 2 * 10^5
             - s consists only of printable ASCII characters.
         """
-        n = len(s)
+        n: int = len(s)
         L: int = 0
         R: int = n - 1
         while L < R:
@@ -125,11 +126,11 @@ class Solution:
             bool: True if the input string is a palindrome, False otherwise.
         """
         # Remove non-alphanumeric chars and convert to lowercase using filter
-        cleaned_s = ''.join(filter(str.isalnum, s)).lower()
+        cleaned_s: str = ''.join(filter(str.isalnum, s)).lower()
 
         # Check if the cleaned string is a palindrome
-        start = 0
-        end = len(cleaned_s) - 1
+        start: int = 0
+        end: int = len(cleaned_s) - 1
         while start < end:
             if cleaned_s[start] != cleaned_s[end]:
                 return False
