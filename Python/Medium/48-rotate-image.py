@@ -7,6 +7,14 @@ class Solution:
         
         The function first transposes the matrix (by swapping matrix[i][j] with matrix[j][i]),
         and then reverses each row to achieve the 90-degree rotation.
+
+        Time Complexity:
+            O(n^2): The algorithm iterates over the matrix twice, first to transpose it and 
+            then to reverse each row. Both operations have a time complexity of O(n^2).
+
+        Space Complexity:
+            O(1): The matrix is modified in-place, so no additional space proportional to the 
+            input size is used.
         
         Args:
             matrix (List[List[int]]): A 2D list representing the matrix to be rotated.
