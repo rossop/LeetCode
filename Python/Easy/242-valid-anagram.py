@@ -1,4 +1,5 @@
 from typing import Dict
+from collections import Counter
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
@@ -23,6 +24,9 @@ class Solution:
         Returns:
             bool: True if t is an anagram of s, otherwise False.
         """
+        if len(s) != len(t):
+            return False
+        
         def count(string: str) -> Dict[str, int]:
             sCount: Dict[str, int] = {}
 
@@ -61,7 +65,9 @@ class Solution:
         Returns:
             bool: True if t is an anagram of s, otherwise False.
         """
-        from collections import Counter
+        if len(s) != len(t):
+            return False
+        
         return Counter(s) == Counter(t)
 
 if __name__ == "__main__":
