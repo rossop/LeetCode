@@ -1,7 +1,7 @@
 # LeetCode
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
-[![LeetCode user rossop](https://img.shields.io/badge/dynamic/json?style=plastic&labelColor=black&color=%23ffa116&label=Solved&query=solved&url=https%3A%2F%2Fleetcode-badge.vercel.app%2Fapi%2Fusers%2Frossop&logo=leetcode&logoColor=yellow)](https://leetcode.com/rossop/)
+[![LeetCode user rossop](https://img.shields.io/badge/dynamic/json?style=flat&labelColor=black&color=%23ffa116&label=Solved&query=solved&url=https%3A%2F%2Fleetcode-badge.vercel.app%2Fapi%2Fusers%2Frossop&logo=leetcode&logoColor=yellow)](https://leetcode.com/rossop/)
 
 This repository contains my solutions to LeetCode problems, organized by programming language and difficulty level. It also includes notes and tips on solving problems and understanding key concepts.
 
