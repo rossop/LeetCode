@@ -36,8 +36,52 @@ Example 3:
 """
 from bisect import bisect_right
 
+
 class Solution:
     def minMirrorPairDistance(self, nums: list[int]) -> int:
+        """
+        Returns the minimum absolute index distance between any mirror pair in nums,
+        or -1 if no mirror pair exists.
+
+        Single pass using a hash map that tracks the most recent index for each
+        reversed value. For each index i with value v, checks if v exists as a key
+        (meaning a previous j stored reverse(nums[j]) = v there), giving a valid
+        pair (j, i). Then stores reverse(v) → i for future lookups.
+
+        Because the most recent j always gives the smallest distance for a given i,
+        only one index per key is needed — no binary search required.
+
+        Args:
+            nums (list[int]): The input array of integers.
+
+        Returns:
+            int: The minimum abs(i - j) across all mirror pairs, or -1 if none exist.
+
+        Time Complexity:
+            O(n): Single pass with O(1) hash map operations.
+
+        Space Complexity:
+            O(n): The hash map stores at most one index per unique reversed value.
+
+        # TODO: Review
+        """
+        def reverse(num: int) -> int:
+            return int(str(num)[::-1])
+
+        last_seen: dict[int, int] = {}
+        ans = float('inf')
+
+        for i, v in enumerate(nums):
+            if v in last_seen:
+                j = last_seen[v]
+                dist: int = i - j
+                ans = min(ans, dist)
+            last_seen[reverse(v)] = i
+
+        return ans if ans != float('inf') else -1
+
+
+    def minMirrorPairDistanceBisect(self, nums: list[int]) -> int:
         """
         Returns the minimum absolute index distance between any mirror pair in nums,
         or -1 if no mirror pair exists.
@@ -67,7 +111,7 @@ class Solution:
         # Pass 1: build a plain value → sorted indices map
         positions: dict[int, list[int]] = {}
         for i, num in enumerate(nums):
-            positions.setdefault(num, []).append(i) # sorted indices
+            positions.setdefault(num, []).append(i)
 
         # Pass 2: for each index i, find the closest j > i where nums[j] == reverse(nums[i])
         ans = float('inf')
@@ -75,14 +119,13 @@ class Solution:
             rev: int = reverse(num)
             if rev not in positions:
                 continue
-            # find the first index in positions[rev] that is strictly greater than i
             candidates = positions[rev]
-            j: int = bisect_right(candidates, i) # j is the insertion point, so candidates[j] > i
-
+            j: int = bisect_right(candidates, i)
             if j < len(candidates):
                 ans = min(ans, candidates[j] - i)
 
         return ans if ans != float('inf') else -1
+
 
 if __name__ == "__main__":
     solution = Solution()
@@ -93,9 +136,14 @@ if __name__ == "__main__":
         ([21, 120], -1),
     ]
 
-    for i, (nums, expected) in enumerate(test_cases, 1):
-        result = solution.minMirrorPairDistance(nums)
-        assert result == expected, f"Test case {i} failed: expected {expected}, got {result}"
-        print(f"Test case {i} passed")
+    for label, method in [
+        ("O(n)     ", solution.minMirrorPairDistance),
+        ("O(n logn)", solution.minMirrorPairDistanceBisect),
+    ]:
+        print(f"--- {label} ---")
+        for i, (nums, expected) in enumerate(test_cases, 1):
+            result = method(nums)
+            assert result == expected, f"Test case {i} failed: expected {expected}, got {result}"
+            print(f"  Test case {i} passed")
 
     print("All test cases passed!")
