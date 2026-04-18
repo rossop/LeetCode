@@ -1,32 +1,37 @@
+"""
+13. Roman to Integer
+
+Problem Statement:
+Roman numerals are represented by seven symbols: I=1, V=5, X=10, L=50, C=100,
+D=500, M=1000. Numerals are written largest to smallest left to right, except
+in six subtraction cases: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900.
+
+Given a Roman numeral string s, convert it to an integer.
+
+Constraints:
+- 1 <= s.length <= 15
+- s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M')
+- It is guaranteed that s is a valid Roman numeral in the range [1, 3999]
+
+Examples:
+
+Example 1:
+    Input: s = "III"
+    Output: 3
+
+Example 2:
+    Input: s = "LVIII"
+    Output: 58
+
+Example 3:
+    Input: s = "MCMXCIV"
+    Output: 1994
+"""
+
+from typing import Dict
+
+
 class Solution:
-    """
-    A class to convert Roman numerals to their corresponding integer values.
-
-    Roman numerals are a numeral system that originated in ancient Rome and remained the usual way of writing numbers throughout Europe well into the Late Middle Ages. They are based on seven symbols:
-    
-    Symbol       Value
-    I             1
-    V             5
-    X             10
-    L             50
-    C             100
-    D             500
-    M             1000
-    
-    Roman numerals are usually written from largest to smallest from left to right. However, some numerals require subtraction (e.g., IV for 4 and IX for 9). The subtraction rule applies in the following cases:
-    
-    - 'I' can precede 'V' (5) and 'X' (10) to make 4 and 9.
-    - 'X' can precede 'L' (50) and 'C' (100) to make 40 and 90.
-    - 'C' can precede 'D' (500) and 'M' (1000) to make 400 and 900.
-    
-    This class provides a method to convert any valid Roman numeral (within the range [1, 3999]) into its integer representation.
-
-    Methods
-    -------
-    romanToInt(s: str) -> int
-        Converts a Roman numeral string to an integer.
-    """
-
     def romanToInt(self, s: str) -> int:
         """
         Converts a Roman numeral string to an integer.
@@ -78,16 +83,66 @@ class Solution:
 
         return summ
 
+    def romanToIntReversed(self, s: str) -> int:
+        """
+        Converts a Roman numeral string to an integer by iterating in reverse.
+
+        Iterates right to left using reversed(), tracking the previous value.
+        If the current symbol is smaller than the one to its right (prev_val),
+        it is a subtraction case and is subtracted; otherwise it is added.
+
+        Avoids the index peek (s[i+1]) needed in the forward pass — the
+        previous value from the last iteration serves the same purpose.
+        reversed() iterates in O(1) extra space with no string reversal.
+
+        Args:
+            s (str): A valid Roman numeral string in the range [1, 3999].
+
+        Returns:
+            int: The integer value of the Roman numeral.
+
+        Time complexity:  O(n)
+        Space complexity: O(1)
+        """
+        roman_map = {
+            'I': 1, 'V': 5, 'X': 10, 'L': 50,
+            'C': 100, 'D': 500, 'M': 1000,
+        }
+
+        ans = 0
+        prev_val = 0
+
+        for char in reversed(s):
+            curr_val = roman_map[char]
+            if curr_val < prev_val:
+                ans -= curr_val
+            else:
+                ans += curr_val
+            prev_val = curr_val
+
+        return ans
+
 
 if __name__ == "__main__":
-    # Test cases with assertions
     solution = Solution()
-    
-    assert solution.romanToInt("III") == 3, "Test case 1 failed"
-    assert solution.romanToInt("IV") == 4, "Test case 2 failed"
-    assert solution.romanToInt("IX") == 9, "Test case 3 failed"
-    assert solution.romanToInt("LVIII") == 58, "Test case 4 failed"
-    assert solution.romanToInt("MCMXCIV") == 1994, "Test case 5 failed"
-    assert solution.romanToInt("MMMCMXCIX") == 3999, "Test case 6 failed"  # Maximum value
+
+    test_cases = [
+        ("III", 3),
+        ("IV", 4),
+        ("IX", 9),
+        ("LVIII", 58),
+        ("MCMXCIV", 1994),
+        ("MMMCMXCIX", 3999),
+    ]
+
+    for label, method in [
+        ("romanToInt        ", solution.romanToInt),
+        ("romanToIntReversed", solution.romanToIntReversed),
+    ]:
+        for s, expected in test_cases:
+            result = method(s)
+            assert result == expected, \
+                f"{label} failed on {s!r}: expected {expected}, got {result}"
+        print(f"  {label} passed")
 
     print("All test cases passed!")
