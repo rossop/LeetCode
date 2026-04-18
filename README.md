@@ -1,70 +1,85 @@
 # LeetCode
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
+![Go](https://img.shields.io/badge/go-1.21-00ADD8.svg)
 [![LeetCode user rossop](https://img.shields.io/badge/dynamic/json?style=flat&labelColor=black&color=%23ffa116&label=Solved&query=solved&url=https%3A%2F%2Fleetcode-badge.vercel.app%2Fapi%2Fusers%2Frossop&logo=leetcode&logoColor=yellow)](https://leetcode.com/rossop/)
 
-This repository contains my solutions to LeetCode problems, organized by programming language and difficulty level. It also includes notes and tips on solving problems and understanding key concepts.
+This repository contains my solutions to LeetCode problems, organised by programming language and difficulty level. It also includes notes and tips on solving problems and understanding key concepts.
 
-### Table of Contents
-   - Helps users quickly navigate your README.
-   - **Example**:
-     - [Project Description](#project-description)
-     - [Folder Structure](#folder-structure)
-     - [How to Use](#how-to-use)
-     - [Languages](#languages)
-     - [Contributing](#contributing)
-     - [License](#license)
+## Table of Contents
+- [Folder Structure](#folder-structure)
+- [Naming Convention](#naming-convention)
+- [How to Use](#how-to-use)
+- [Languages](#languages)
+- [References](#references)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Folder Structure
-- `LeetCode/`: The root directory.
-- `Python/`: Contains Python solutions categorized by difficulty.
-- `Notes/`: Contains notes on concepts and strategies related to problem-solving.
 
 ```plaintext
 LeetCode/
 │
 ├── Python/
 │   ├── Easy/
-│   │   ├── problem_001.py
-│   │   ├── problem_002.py
+│   │   ├── 1_two_sum.py
 │   │   └── ...
 │   ├── Medium/
-│   │   ├── problem_101.py
-│   │   ├── problem_102.py
 │   │   └── ...
 │   └── Hard/
-│       ├── problem_201.py
-│       ├── problem_202.py
 │       └── ...
 │
-├── Notes/
-│   ├── Python/
-│   │   └── concepts.md
-│   ├── AnotherLanguage/
-│   │   └── concepts.md
-│   └── General/
-│       └── tips_tricks.md
+├── Golang/
+│   ├── Easy/
+│   │   ├── 1_two_sum.go
+│   │   └── ...
+│   ├── Medium/
+│   │   └── ...
+│   └── Hard/
+│       └── ...
 │
 └── README.md
 ```
 
+## Naming Convention
+
+Files are named using the pattern `{problem_number}_{snake_case_title}.{ext}`.
+
+Within each file, solutions follow this method naming pattern:
+
+| Method name | Description |
+|---|---|
+| `solve` / `methodName` | Canonical solution — optimal approach, matches LeetCode signature |
+| `methodNameAlternative` | Alternative with the same complexity but a different technique |
+| `methodNameBisect` | Variant using binary search |
+| `methodNameNaive` | Brute-force reference implementation |
+
+Where multiple approaches exist they are all implemented and tested in the same file.
+
 ## How to Use
-- Clone the repository using `git clone https://github.com/yourusername/LeetCode.git`.
-- Navigate to the desired problem in the `Python/` directory and run the script using Python.
-- Notes on various concepts are available in the `Notes/` directory.
+
+**Python**
+```bash
+python3 Python/Easy/13_roman_to_integer.py
+```
+
+**Go**
+```bash
+go run Golang/Easy/13_roman_to_integer.go
+```
 
 ## Languages
-- **Python**: Most of the solutions are implemented in Python due to its readability and efficiency in solving algorithmic problems.
-
-## Contributing
-- Feel free to leave **comments and suggestions** by submitting pull requests or opening issues.
+- **Python**: Primary language for solutions. Emphasises readability and Pythonic idioms.
+- **Go**: Secondary language. Solutions explore idiomatic Go patterns including byte slices, closures, and standard library packages (`slices`, `cmp`).
 
 ## References
-- If you are just starting out, start here: [AlgoMap.io](https://algomap.io/)
-- You can create a leetcode badge by using [this](https://leetcode-badge.vercel.app/).
+- Starting out: [AlgoMap.io](https://algomap.io/)
+- Structured roadmap and video explanations: [NeetCode.io](https://neetcode.io/)
+- Beginner-friendly video content: [Greg Hogg](https://linktr.ee/greghogg) — [YouTube](https://www.youtube.com/@GregHogg)
+- LeetCode badge generator: [leetcode-badge.vercel.app](https://leetcode-badge.vercel.app/)
+
+## Contributing
+Feel free to leave comments and suggestions by submitting pull requests or opening issues.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENCE) file for details.
-
-## Acknowledgements
-Thanks to [Greg Hogg](linktr.ee/greghogg) for his brilliant educational content which is appropariate for any level. You can start from [his youtube channell](www.youtube.com/@GregHogg).
+This project is licensed under the MIT License — see the [LICENSE](LICENCE) file for details.
