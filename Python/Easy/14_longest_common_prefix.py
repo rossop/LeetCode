@@ -1,34 +1,34 @@
 """
-NOTES
-When looking at other people times my solution does not seem to beat other ones by much. 
-This code is only in the 28% percentile. Even adding a solution using map doesn't speed up much the solution. 
+14. Longest Common Prefix
+
+Problem Statement:
+Write a function to find the longest common prefix string amongst an array of
+strings. If there is no common prefix, return an empty string "".
+
+Constraints:
+- 1 <= strs.length <= 200
+- 0 <= strs[i].length <= 200
+- strs[i] consists of only lowercase English letters.
+
+Examples:
+
+Example 1:
+    Input: strs = ["flower","flow","flight"]
+    Output: "fl"
+
+Example 2:
+    Input: strs = ["dog","racecar","car"]
+    Output: ""
+    Explanation: There is no common prefix among the input strings.
+
+Note: LeetCode benchmark shows ~28th percentile; adding map-based variants
+does not significantly change runtime in practice.
 """
 
 from typing import List
 
+
 class Solution:
-    """
-    A class to solve the 'Longest Common Prefix' problem.
-
-    Problem:
-        Write a function to find the longest common prefix string amongst an array of strings.
-        If there is no common prefix, return an empty string "".
-
-        Example 1:
-            Input: strs = ["flower", "flow", "flight"]
-            Output: "fl"
-
-        Example 2:
-            Input: strs = ["dog", "racecar", "car"]
-            Output: ""
-            Explanation: There is no common prefix among the input strings.
-
-    Constraints:
-        - 1 <= strs.length <= 200
-        - 0 <= strs[i].length <= 200
-        - strs[i] consists of only lowercase English letters.
-    """
-
     def longestCommonPrefix(self, strs: List[str]) -> str:
         """
         Finds the longest common prefix string among an array of strings.
@@ -124,6 +124,33 @@ class Solution:
                 
         return "".join(output)
 
+    def longestCommonPrefixSort(self, strs: list[str]) -> str:
+        """
+        Finds the longest common prefix by comparing only the lexicographic
+        extremes after sorting.
+
+        After sorting, the strings that differ the most are the first and last.
+        Any character position where first and last agree must be shared by
+        every string in between (by the definition of lexicographic order), so
+        the common prefix of all n strings equals the common prefix of just
+        these two.
+
+        Reduces n per-character comparisons to 1, at the cost of an O(n log n)
+        sort. For large n with a very short common prefix the vertical scan is
+        faster; for large n with a long common prefix this wins by scanning only
+        two strings instead of all n.
+
+        Time complexity:  O(n log n · L + m) where L = avg string length,
+                          m = length of the common prefix
+        Space complexity: O(1) extra (sort is in-place)
+        """
+        strs.sort()
+        first, last = strs[0], strs[-1]
+        i = 0
+        while i < len(first) and first[i] == last[i]:
+            i += 1
+        return first[:i]
+
     def longestCommonPrefixManual(self, strs: List[str]) -> str:
         """
         An alternative implementation that manually checks for common characters
@@ -206,5 +233,6 @@ if __name__ == "__main__":
         assert solution.longestCommonPrefix(strs) == expected, f"Method 1, Test case {i} failed"
         assert solution.longestCommonPrefixMap(strs) == expected, f"Method 2, Test case {i} failed"
         assert solution.longestCommonPrefixManual(strs) == expected, f"Method 3, Test case {i} failed"
+        assert solution.longestCommonPrefixSort(strs[:]) == expected, f"Method 4, Test case {i} failed"
 
     print("All test cases passed!")
