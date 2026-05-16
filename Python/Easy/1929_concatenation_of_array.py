@@ -30,11 +30,8 @@ This script contains a Solution class with two methods to solve the problem:
   list concatenation to achieve the same result.
 """
 
-from typing import List
-
-
 class Solution:
-    def getConcatenation(self, nums: List[int]) -> List[int]:
+    def getConcatenation(self, nums: list[int]) -> list[int]:
         """
         This method creates a new list `ans` of length 2n and assigns the
         elements of `nums` to the appropriate positions.
@@ -44,20 +41,20 @@ class Solution:
         of nums.
 
         Args:
-            nums (List[int]): The input list of integers.
+            nums (list[int]): The input list of integers.
 
         Returns:
-            List[int]: The concatenated list.
+            list[int]: The concatenated list.
         """
         n: int = len(nums)
-        ans: List[int] = [0] * 2 * n
+        ans: list[int] = [0] * 2 * n
         for i in range(n):
             ans[i] = nums[i]
             ans[i + n] = nums[i]
 
         return ans
 
-    def getConcatenationSimple(self, nums: List[int]) -> List[int]:
+    def getConcatenationSimple(self, nums: list[int]) -> list[int]:
         """
         This method leverages Python's list concatenation to simply return
         `nums + nums`.
@@ -67,10 +64,10 @@ class Solution:
         of nums.
 
         Args:
-            nums (List[int]): The input list of integers.
+            nums (list[int]): The input list of integers.
 
         Returns:
-            List[int]: The concatenated list.
+            list[int]: The concatenated list.
         """
         return nums + nums
 

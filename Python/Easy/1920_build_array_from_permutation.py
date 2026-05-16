@@ -25,11 +25,8 @@ Constraints:
     The elements in nums are distinct.
 """
 
-from typing import List
-
-
 class Solution:
-    def buildArray(self, nums: List[int]) -> List[int]:
+    def buildArray(self, nums: list[int]) -> list[int]:
         """
         Build an array `ans` where `ans[i] = nums[nums[i]]` using a new list
         for storing the result.
@@ -38,21 +35,21 @@ class Solution:
         Space Complexity: O(n) due to the extra space used by the `ans` list.
 
         Args:
-            nums (List[int]): The input list of integers representing a
+            nums (list[int]): The input list of integers representing a
             zero-based permutation.
 
         Returns:
-            List[int]: The list generated from the permutation.
+            list[int]: The list generated from the permutation.
         """
         n: int = len(nums)
-        ans: List[int] = [0] * n
+        ans: list[int] = [0] * n
 
         for i in range(n):
             ans[i] = nums[nums[i]]
 
         return ans
 
-    def buildArrayInPlace(self, nums: List[int]) -> List[int]:
+    def buildArrayInPlace(self, nums: list[int]) -> list[int]:
         """
         Build an array `ans` where `ans[i] = nums[nums[i]]` without using
         extra space. This method leverages the properties of modular arithmetic
@@ -63,11 +60,11 @@ class Solution:
         input list.
 
         Args:
-            nums (List[int]): The input list of integers representing a
+            nums (list[int]): The input list of integers representing a
             zero-based permutation.
 
         Returns:
-            List[int]: The list generated from the permutation.
+            list[int]: The list generated from the permutation.
         """
         n: int = len(nums)
 

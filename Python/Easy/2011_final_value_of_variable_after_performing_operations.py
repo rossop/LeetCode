@@ -48,10 +48,8 @@ Constraints:
     operations[i] will be either "++X", "X++", "--X", or "X--".
 """
 
-from typing import List
-
 class Solution:
-    def finalValueAfterOperations(self, operations: List[str]) -> int:
+    def finalValueAfterOperations(self, operations: list[str]) -> int:
         """
         Direct approach using a loop to evaluate the final value of X.
 
@@ -59,7 +57,7 @@ class Solution:
         Space Complexity: O(1), as only a few additional variables are used.
 
         Args:
-            operations (List[str]): List of operations to perform on X.
+            operations (list[str]): List of operations to perform on X.
 
         Returns:
             int: The final value of X after all operations.
@@ -72,7 +70,7 @@ class Solution:
                 ans -= 1
         return ans
 
-    def finalValueAfterOperationsWithMap(self, operations: List[str]) -> int:
+    def finalValueAfterOperationsWithMap(self, operations: list[str]) -> int:
         """
         Attempted approach using map to evaluate the final value of X.
         However, this version is incorrect due to the misuse of map and sum
@@ -82,7 +80,7 @@ class Solution:
         Space Complexity: O(1), as only a few additional variables are used.
 
         Args:
-            operations (List[str]): List of operations to perform on X.
+            operations (list[str]): List of operations to perform on X.
 
         Returns:
             int: The final value of X after all operations.
@@ -96,7 +94,7 @@ class Solution:
 
         return sum(map(eval_, operations))
 
-    def finalValueAfterOperationsComp(self, operations: List[str]) -> int:
+    def finalValueAfterOperationsComp(self, operations: list[str]) -> int:
         """
         A more concise implementation using list comprehension and sum.
 
