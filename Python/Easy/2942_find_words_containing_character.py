@@ -33,12 +33,9 @@ Constraints:
     - x is a lowercase English letter.
     - words[i] consists only of lowercase English letters.
 """
-from typing import List
-
-
 class Solution:
 
-    def findWordsContaining(self, words: List[str], x: str) -> List[int]:
+    def findWordsContaining(self, words: list[str], x: str) -> list[int]:
         """
         This method finds all the indices of words in the given list that
         contain the character 'x'.
@@ -55,7 +52,7 @@ class Solution:
         Returns:
         List[int]: List of indices of words containing the character 'x'.
         """
-        wordCount: List[int] = []
+        wordCount: list[int] = []
         for pos, w in enumerate(words):
             if x in w:
                 wordCount.append(pos)
