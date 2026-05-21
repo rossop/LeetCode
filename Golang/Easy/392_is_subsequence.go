@@ -29,15 +29,6 @@ func (sol Solution) isSubsequence(s, t string) bool {
 	return ps == lenS
 }
 
-// isSubsequenceAlternative returns true if s is a subsequence of t using an
-// explicit for loop over t with early return on full match.
-//
-// Time complexity:  O(len(t))
-// Space complexity: O(1)
-func (sol Solution) isSubsequenceAlternative(s, t string) bool {
-	return false // TODO
-}
-
 func main() {
 	testCases := []struct {
 		s        string
@@ -58,7 +49,6 @@ func main() {
 		fn    func(string, string) bool
 	}{
 		{"isSubsequence           ", sol.isSubsequence},
-		{"isSubsequenceAlternative", sol.isSubsequenceAlternative},
 	} {
 		fmt.Printf("--- %s ---\n", approach.label)
 		for i, tc := range testCases {
